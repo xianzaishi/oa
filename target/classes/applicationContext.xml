@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:component-scan base-package="com.zhl.oa"/>	
+	<mvc:annotation-driven/>
+	
+    <!-- 支持上传文件 --> 
+    <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+    	<!-- set the max upload size100MB -->  
+        <property name="maxUploadSize">  
+            <value>104857600</value>  
+        </property>  
+        <property name="maxInMemorySize">  
+            <value>4096</value>  
+        </property>
+	</bean>
+    
+	<!-- 配置resources文件夹下文件的映射,使js可用 -->
+	<mvc:resources mapping="/resources/**" location="classpath:/resources/" />
+    <mvc:default-servlet-handler /> 
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+          <property name="url" value="jdbc:mysql://localhost:3306/oa"/>
+          <property name="username" value="root"/>
+          <property name="password" value="123456"/>
+	</bean>
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	      <property name="dataSource" ref="dataSource"/>
+	      <property name="configLocation" value="classpath:sqlMapconfig.xml"/>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver"/>
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	     <property name="checkRefresh"  value="true"/>
+	     <property name="definitions">
+	     	<value>/WEB-INF/layouts/tiles-ums.xml,/WEB-INF/layouts/tiles-cms.xml</value>
+	     </property>
+	</bean>	
+</beans>

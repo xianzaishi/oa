@@ -1,0 +1,49 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="dept">
+<select id="queryDeptCount" resultClass="java.lang.Integer">
+	select count(*) from department
+</select>
+<select id="queryDept" resultClass="com.zhl.oa.model.Department">
+	select id as id,
+		department as department
+	from department
+</select>
+<insert id="addDept" parameterClass="com.zhl.oa.model.Department">
+	insert into department
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="department">            
+		     department = #department#  
+		</isNotNull>  
+	</dynamic> 
+</insert>
+<delete id="deleteDept" parameterClass="java.lang.Integer">
+	delete from department
+	where id = #id:INTEGER#
+</delete>
+<select id="queryDeptById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.Department">
+	select id as id,
+		department as department
+	from department
+	where id = #id:INTEGER#
+</select>
+<update id="editDept" parameterClass="com.zhl.oa.model.Department">
+	update department
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="department">            
+		     department = #department#  
+		</isNotNull>  
+	</dynamic> 
+	where id = #id:INTEGER#
+</update>
+<select id="queryDeptByName" parameterClass="java.lang.String" resultClass="com.zhl.oa.model.Department">
+	select * from department
+	where department like #department#
+</select>
+<select id="queryDeptByNameCount"  parameterClass="java.lang.String" resultClass="java.lang.Integer">
+	select count(*) from department
+	where department like #department#
+</select>
+</sqlMap>
+
+
+

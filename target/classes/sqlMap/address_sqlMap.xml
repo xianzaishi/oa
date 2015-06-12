@@ -1,0 +1,68 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="address">
+<insert id="add" parameterClass="com.zhl.oa.model.Address">
+	insert into address_list
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="name">            
+		     name = #name#  
+		</isNotNull>  
+		<isNotNull prepend="," property="mobile">            
+		     mobile = #mobile#  
+		</isNotNull>  
+		<isNotNull prepend="," property="deptId">            
+		     dept_id = #deptId:INTEGER#  
+		</isNotNull>  
+	</dynamic> 
+</insert>
+<select id="queryAddressList" resultClass="com.zhl.oa.model.Address">
+	select id as id,
+		name as name,
+		mobile as mobile,
+		dept_id as deptId
+	from address_list
+	order by id asc
+</select>
+<select id="queryAddressDtoList" resultClass="com.zhl.oa.dto.AddressDto">
+	select a.id as id,
+		a.name as name,
+		a.mobile as mobile,
+		a.dept_id as deptId,
+		d.department as dept
+	from address_list a
+	left join department d on a.dept_id = d.id
+	order by id asc
+</select>
+<select id="queryAddressCount" resultClass="java.lang.Integer">
+	select count(*) from address_list
+</select>
+<select id="queryAddressById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.Address">
+	select id as id,
+		name as name,
+		mobile as mobile,
+		dept_id as deptId
+	from address_list
+	where id = #id:INTEGER#
+	order by id asc
+</select>
+<delete id="deleteAddressById" parameterClass="java.util.List">
+	delete from address_list
+	where id in    
+	<iterate conjunction="," open="(" close=")">
+		#ids[]#
+	</iterate>
+</delete>
+<select id="queryAddressByKeyword" parameterClass="java.lang.String" resultClass="com.zhl.oa.dto.AddressDto">
+   	select a.id as id,
+		a.name as name,
+		a.mobile as mobile,
+		a.dept_id as deptId,
+		d.department as dept
+	from address_list a
+	left join department d on a.dept_id = d.id
+   	where a.name like '%$keyword$%'
+</select>
+<select id="keywordSearchResultCount" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+  	select count(*) from address_list
+  	where name like '%$keyword$%'
+</select>
+</sqlMap>

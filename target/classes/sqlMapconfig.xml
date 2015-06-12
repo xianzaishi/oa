@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config2.0//EN" "http://ibatis.apache.org//dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+ 	<settings useStatementNamespaces="true" cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" />
+		
+	<sqlMap resource="sqlMap/user_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/role_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/channel_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/content_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/fileUpload_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/notice_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/officialDocument_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/dept_sqlMap.xml"/>
+	<sqlMap resource="sqlMap/address_sqlMap.xml"/>
+</sqlMapConfig> 

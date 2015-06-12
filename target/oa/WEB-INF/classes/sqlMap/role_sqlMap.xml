@@ -1,0 +1,57 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="role">
+<insert id="addRole" parameterClass="com.zhl.oa.model.Role">
+	insert into role
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="name">            
+		     name = #name#  
+		</isNotNull>  
+		<isNotNull prepend="," property="modelName">            
+		     model_name = #modelName#  
+		</isNotNull>  
+	</dynamic> 
+</insert>
+<select id="queryRole" resultClass="com.zhl.oa.model.Role">
+	select id as id,
+		name as name,
+		model_name as modelName
+	from role
+</select>
+<select id="queryRoleCount" resultClass="java.lang.Integer">
+	select count(*) from role
+</select>
+<delete id="deleteRole" parameterClass="java.lang.Integer">
+	delete from role
+	where id = #id:INTEGER#
+</delete>
+<select id="queryRoleById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.Role">
+	select id as id,
+		name as name,
+		model_name as modelName
+	from role
+	where id = #id:INTEGER#
+</select>
+<update id="editRole" parameterClass="com.zhl.oa.model.Role">
+	update role
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="name">            
+		     name = #name#  
+		</isNotNull>  
+		<isNotNull prepend="," property="modelName">            
+		     model_name = #modelName#  
+		</isNotNull>  
+	</dynamic> 
+	where id = #id:INTEGER#
+</update>
+<select id="queryRoleByName" parameterClass="java.lang.String" resultClass="com.zhl.oa.model.Role">
+	select * from role
+	where name like #name#
+</select>
+<select id="queryRoleByNameCount"  parameterClass="java.lang.String" resultClass="java.lang.Integer">
+	select count(*) from role
+	where name like #name#
+</select>
+</sqlMap>
+
+
+

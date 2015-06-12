@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<!-- 后台模板 -->
+    <definition name="ums.base" template="/WEB-INF/pages/commons/ums/layouts.jsp">
+        <put-attribute name="head" value="/WEB-INF/pages/commons/ums/head.jsp"/>
+        <put-attribute name="left" value="/WEB-INF/pages/commons/ums/left.jsp"/>
+        <put-attribute name="right" value="/WEB-INF/pages/commons/ums/right.jsp"/>
+        <put-attribute name="foot" value="/WEB-INF/pages/commons/ums/foot.jsp"/>
+    </definition> 
+    
+    <!-- 登陆页面 -->
+    <definition name="loginView" template="/WEB-INF/pages/login.jsp">
+    </definition>
+    
+    <!-- 主页 -->
+    <definition name="indexView" extends="ums.base">
+        <put-attribute name="right" value="/WEB-INF/pages/index.jsp"/>
+    </definition>
+    
+    <!-- ums主页 -->
+    <definition name="umsIndexView" extends="ums.base">
+        <put-attribute name="right" value="/WEB-INF/pages/ums/back-end/index.jsp"/>
+    </definition>  
+    
+    <!-- 用户管理主页 -->
+    <definition name="userManagementView" extends="ums.base">
+        <put-attribute name="right" value="/WEB-INF/pages/ums/back-end/user/index.jsp"/>
+    </definition>  
+    
+    <!-- 增加用户 -->
+    <definition name="addUser" template="/WEB-INF/pages/ums/back-end/user/add.jsp">
+    </definition>
+    
+    <!-- 编辑用户 -->
+    <definition name="editUser" template="/WEB-INF/pages/ums/back-end/user/edit.jsp">
+    </definition>
+    
+    <!-- 操作成功 -->
+    <definition name="success" template="/WEB-INF/pages/ums/back-end/success.jsp">
+    </definition>
+    
+    <!-- 部门管理主页 -->
+    <definition name="deptManagementView" extends="ums.base">
+        <put-attribute name="right" value="/WEB-INF/pages/ums/back-end/dept/index.jsp"/>
+    </definition>
+    
+    <!-- 增加部门 -->
+    <definition name="addDept" template="/WEB-INF/pages/ums/back-end/dept/add.jsp">
+    </definition>
+    
+    <!-- 编辑部门-->
+    <definition name="editDept" template="/WEB-INF/pages/ums/back-end/dept/edit.jsp">
+    </definition>
+    
+    <!-- 搜索部门 -->
+    <definition name="searchDept" extends="ums.base">
+        <put-attribute name="right" value="/WEB-INF/pages/ums/back-end/dept/search.jsp"/>
+    </definition>
+    
+    <!-- 搜索人员 -->
+    <definition name="searchUser" extends="ums.base">
+        <put-attribute name="right" value="/WEB-INF/pages/ums/back-end/user/search.jsp"/>
+    </definition>
+    
+    <!-- 角色授权 -->
+    <definition name="userAuthorize" template="/WEB-INF/pages/ums/back-end/user/authorize.jsp">
+    </definition>
+    
+    <!-- 关闭 -->
+    <definition name="close" template="/WEB-INF/pages/ums/back-end/close.jsp">
+    </definition>
+    
+    <!-- 403 -->
+    <definition name="accessDenied" template="/WEB-INF/pages/accessDenied.jsp">
+    </definition>
+</tiles-definitions>

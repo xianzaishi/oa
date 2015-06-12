@@ -1,0 +1,101 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="notice">
+	<insert id="addNotice" parameterClass="com.zhl.oa.model.Notice">
+		insert into notice 
+		(title, content
+		<dynamic prepend="">
+			<isNotEmpty prepend="," property="creator">creator</isNotEmpty>
+			<isNotEmpty prepend="," property="modifier">modifier</isNotEmpty>
+			<isNotEmpty prepend="," property="createDate">create_date</isNotEmpty>
+			<isNotEmpty prepend="," property="modifyDate">modify_date</isNotEmpty>
+		</dynamic>
+		)
+		values (#title#, #content#
+		<dynamic prepend="">
+			<isNotEmpty prepend="," property="creator">#creator#</isNotEmpty>
+			<isNotEmpty prepend="," property="modifier">#modifier#</isNotEmpty>
+			<isNotEmpty prepend="," property="createDate">#createDate#</isNotEmpty>
+			<isNotEmpty prepend="," property="modifyDate">#modifyDate#</isNotEmpty>
+		</dynamic>
+		)
+	</insert>
+	<select id="queryNotice" resultClass="com.zhl.oa.model.Notice">
+		select id as id, 
+			title as title, 
+			content as content, 
+			creator as creator, 
+			modifier as modifier, 
+			create_date as createDate, 
+			modify_date as modifyDate 
+		from notice
+		order by create_date desc
+	</select>
+	<select id="queryNoticeTopX" resultClass="com.zhl.oa.model.Notice" parameterClass="java.lang.Integer">
+		select id as id, 
+			title as title, 
+			content as content, 
+			creator as creator, 
+			modifier as modifier, 
+			create_date as createDate, 
+			modify_date as modifyDate 
+		from notice
+		order by create_date desc
+		limit #x:INTEGER#
+	</select>
+	<select id="queryNoticeById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.Notice">
+		select id as id, 
+			title as title, 
+			content as content, 
+			creator as creator, 
+			modifier as modifier, 
+			create_date as createDate, 
+			modify_date as modifyDate 
+		from notice
+		where id = #id:INTEGER#
+	</select>
+	<select id="queryNoticeCount" resultClass="java.lang.Integer">
+		select count(id) from notice
+	</select>
+	<delete id="deleteNoticeById" parameterClass="java.util.List">
+		delete from notice
+		where id in    
+		<iterate conjunction="," open="(" close=")">
+			#ids[]#
+		</iterate>
+    </delete>
+    <update id="updateNotice" parameterClass="com.zhl.oa.model.Notice">
+    	update notice   
+      	<dynamic prepend="set">  
+          <isNotNull prepend="," property="title">            
+               title = #title#  
+           </isNotNull>  
+          <isNotNull prepend="," property="content">            
+               content = #content#  
+           </isNotNull>  
+          <isNotNull prepend="," property="creator">            
+               creator = #creator#  
+           </isNotNull>  
+          <isNotNull prepend="," property="modifier">            
+               modifier = #modifier#  
+           </isNotNull>  
+          <isNotNull prepend="," property="createDate">            
+               create_date = #createDate#  
+           </isNotNull>  
+          <isNotNull prepend="," property="modifyDate">            
+               modify_date = #modifyDate#  
+           </isNotNull>  
+      	</dynamic>  
+     	where id=#id:INTEGER#
+    </update>
+    <select id="queryNoticeByKeyword" parameterClass="java.lang.String" resultClass="com.zhl.oa.model.Notice">
+    	select * from notice
+    	where title like '%$keyword$%'
+    </select>
+    <select id="keywordSearchResultCount" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+    	select count(*) from notice
+    	where title like '%$keyword$%'
+    </select>
+</sqlMap>
+
+
+

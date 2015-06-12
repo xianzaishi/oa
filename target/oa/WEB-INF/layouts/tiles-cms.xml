@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<!-- 后台模板 -->
+    <definition name="cms.base" template="/WEB-INF/pages/commons/cms/layouts.jsp">
+        <put-attribute name="head" value="/WEB-INF/pages/commons/cms/head.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/pages/commons/cms/body.jsp"/>
+        <put-attribute name="foot" value="/WEB-INF/pages/commons/cms/foot.jsp"/>
+    </definition> 
+    
+    <!-- cms首页 -->
+    <definition name="cmsIndexView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/index.jsp"/>
+    </definition>
+    
+    <!-- 单位公告 -->
+    <definition name="noticeView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/notice/notice.jsp"/>
+    </definition>
+    
+    <!-- 添加通知 -->
+    <definition name="addNoticeView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/notice/add.jsp"/>
+    </definition>
+    
+    <!-- 编辑通知 -->
+    <definition name="editNoticeView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/notice/edit.jsp"/>
+    </definition>
+    
+    <!-- 搜索通知 -->
+    <definition name="searchNoticeView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/notice/search.jsp"/>
+    </definition>
+    
+    <!-- 预览通知 -->
+    <definition name="previewNoticeView" template="/WEB-INF/pages/cms/notice/preview.jsp">
+    </definition>
+    
+    <!-- 单位文件 -->
+    <definition name="officialDocumentView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/officialDocument/index.jsp"/>
+    </definition>
+    
+    <!-- 添加部门文件夹 -->
+    <definition name="officialDocumentAddView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/officialDocument/addFolder.jsp"/>
+    </definition>
+    
+    <!-- 编辑部门文件夹 -->
+    <definition name="officialDocumentEditView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/officialDocument/editFolder.jsp"/>
+    </definition>
+    
+    <!-- 部门文件 -->
+    <definition name="officialDocumentFileView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/officialDocument/fileList.jsp"/>
+    </definition>
+    
+    <!-- 添加文件 -->
+    <definition name="officialDocumentFileAddView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/officialDocument/addFile.jsp"/>
+    </definition>
+    
+    <!-- 预览通知 -->
+    <definition name="officialDocumentFileDownView" template="/WEB-INF/pages/cms/officialDocument/download.jsp">
+    </definition>
+    
+    <!-- **************************************通讯录****************************************** -->
+    <!-- 主页 -->
+    <definition name="addressListIndexView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/addressList/index.jsp"/>
+    </definition>
+    
+    <!-- 添加 -->
+    <definition name="addressListAddView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/addressList/add.jsp"/>
+    </definition>
+    
+    <!-- 搜索 -->
+    <definition name="addressListSearchView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/addressList/search.jsp"/>
+    </definition>
+    
+    <!-- **************************************内部邮件****************************************** -->
+    <!-- 主页 -->
+    <definition name="mailIndexView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/mail/index.jsp"/>
+    </definition>
+    
+    <!-- 添加 -->
+    <definition name="mailAddView" extends="cms.base">
+        <put-attribute name="body" value="/WEB-INF/pages/cms/mail/add.jsp"/>
+    </definition>
+</tiles-definitions>

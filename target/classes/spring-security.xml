@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd 
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	
+	<!-- auto-config='true'将自动配置几种常用的权限控制机制，包括form, anonymous, rememberMe -->
+  	<http use-expressions="true">
+		<form-login login-page="/ums/login" default-target-url="/cms/index" always-use-default-target="true"/>
+  		<logout/>
+		<session-management invalid-session-url="/ums/login" session-fixation-protection="migrateSession"/> <!-- 检测session超时,并把用户转发到对应的URL -->
+		<custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+		<access-denied-handler error-page="/403"/>
+	</http>
+	
+	<!-- 配置过滤器 -->
+	<beans:bean id="mySecurityFilter" class="com.zhl.oa.util.MySecurityFilter" >
+    	<!-- 用户拥有的权限 -->
+    	<beans:property name="authenticationManager" ref="myAuthenticationManager" />
+    	<!-- 资源与权限对应关系 -->
+    	<beans:property name="securityMetadataSource" ref="mySecurityMetadataSource" />
+    	<!-- 资源 和 用户权限 -->
+    	<beans:property name="accessDecisionManager" ref="affirmativeBased" />
+    </beans:bean>
+    
+    <!-- AffirmativeBased 认证管理器 -->
+    <beans:bean id="affirmativeBased" class="org.springframework.security.access.vote.AffirmativeBased">
+    	<!-- 是否允许所有的投票者弃权,如果为false，表示如果所有的投票者弃权，就禁止访问 -->  
+        <beans:property name="allowIfAllAbstainDecisions" value="false" />
+        <beans:property name="decisionVoters">  
+            <beans:list>
+            	<beans:bean class="org.springframework.security.access.vote.RoleVoter" />
+				<beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+			</beans:list>
+		</beans:property>
+    </beans:bean>
+    
+	<!-- 配置URL+权限管理器 -->
+    <beans:bean id="mySecurityMetadataSource" class="com.zhl.oa.util.MyFilterInvocationSecurityMetadataSource">
+    	<beans:property name="resourceDao" ref="resourceDaoBean" />
+    </beans:bean>
+    <beans:bean id="resourceDaoBean" class="com.zhl.oa.dao.ResourceDao" >
+   		<beans:property name="jdbcTemplate" ref="jdbcTemplateBean"/>
+   	</beans:bean>
+   	
+   	<!-- authentication-manager管理器 -->
+    <authentication-manager alias="myAuthenticationManager">
+        <authentication-provider user-service-ref="myUserDetailServiceBean" />
+    </authentication-manager>
+    
+    <!-- UserDetailsService实现 -->
+   	<beans:bean id="myUserDetailServiceBean" class="com.zhl.oa.util.MyUserDetailsService">
+   		<beans:property name="userDao" ref="userDaoBean" />
+   	</beans:bean>
+   	<beans:bean id="userDaoBean" class="com.zhl.oa.dao.UserDao" >
+   		<beans:property name="jdbcTemplate" ref="jdbcTemplateBean"/>
+ 	</beans:bean>
+ 	
+ 	<beans:bean id="jdbcTemplateBean" class="org.springframework.jdbc.core.JdbcTemplate">
+ 		<beans:property name="dataSource" ref="dataSource"/>
+ 	</beans:bean>
+ 	
+ 	<!-- 未登录的切入点 -->  
+    <beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
+        <beans:property name="loginFormUrl" value="/ums/login"></beans:property>  
+    </beans:bean>
+	
+	<!-- 启用 jsr250-annotations注解 进行方法访问控制 -->
+	<!-- 
+	<global-method-security jsr250-annotations="enabled"></global-method-security>
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+				<user name="user" password="user" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	 -->
+</beans:beans>  

@@ -1,0 +1,120 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="officialDocument">
+	<select id="queryDept" resultClass="com.zhl.oa.model.DeptFolder">
+		select id as id, 
+			name as name 
+		from dept_folder
+		order by id asc
+	</select>
+	<select id="queryDeptCount" resultClass="java.lang.Integer">
+		select count(id) from dept_folder
+	</select>
+	<insert id="insertDeptFolder" parameterClass="com.zhl.oa.model.DeptFolder">
+		insert into dept_folder (name) values (#name#)
+	</insert>
+	<select id="queryDeptFolderById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.DeptFolder">
+		select id, name from dept_folder
+		where id = #id:INTEGER#
+	</select>
+	<update id="updateDeptFolder" parameterClass="com.zhl.oa.model.DeptFolder">
+		update dept_folder set name = #name#
+		where id = #id:INTGER#
+	</update>
+	<delete id="deleteDeptFodlerById" parameterClass="java.util.List">
+		delete from dept_folder
+		where id in    
+		<iterate conjunction="," open="(" close=")">
+			#ids[]#
+		</iterate>
+    </delete>
+    <select id="queryDeptFile" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.DeptFile">
+    	select id as id,
+    		folder_id as folderId,
+    		title as title,
+    		file_id as fileId,
+    		create_date as createDate,
+    		creator as creator
+    	from dept_file
+    	where folder_id = #folderId:INTEGER#
+    	order by id desc
+    </select>
+    <select id="queryFileTopX" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.MyFile">
+    select d.id as id,
+    	d.title as fileName, 
+    	f.path as path
+    from dept_file d
+	left join file f on d.file_id = f.id
+	order by create_date desc
+	limit #x:INTEGER#
+    </select>
+    <select id="queryDeptFileById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.DeptFile">
+    	select id as id,
+    		folder_id as folderId,
+    		title as title,
+    		file_id as fileId,
+    		create_date as createDate,
+    		creator as creator
+    	from dept_file
+    	where id = #id:INTEGER#
+    </select>
+    <select id="queryDeptFileCount" resultClass="java.lang.Integer">
+		select count(id) from dept_file
+	</select>
+	<insert id="insertFile" parameterClass="com.zhl.oa.model.MyFile">
+		insert into file (file_name, path, enable) values (#fileName#, #path#, 1)
+		<selectKey resultClass="java.lang.Integer" keyProperty="id">
+			select last_insert_id() as id from file limit 1
+		</selectKey>
+	</insert>
+	<insert id="insertDeptFile" parameterClass="com.zhl.oa.model.DeptFile">
+		insert into dept_file
+		(folder_id, title, file_id, create_date
+		<dynamic prepend="">
+			<isNotEmpty prepend="," property="creator">creator</isNotEmpty>
+		</dynamic>
+		)
+		values (#folderId#, #title#, #fileId#, #createDate#
+		<dynamic prepend="">
+			<isNotEmpty prepend="," property="creator">#creator#</isNotEmpty>
+		</dynamic>
+		)
+	</insert>
+	<select id="queryFileById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.MyFile">
+		select id as id,
+			file_name as fileName,
+			path as path,
+			enable as enable
+		from file
+		where id = #id:INTEGER#
+	</select>
+	<delete id="deleteDeptFileById" parameterClass="java.util.List">
+		delete from dept_file
+		where id in    
+		<iterate conjunction="," open="(" close=")">
+			#ids[]#
+		</iterate>
+    </delete>
+    <delete id="deleteFileById" parameterClass="java.util.List">
+		delete from file
+		where id in 
+		(select file_id from dept_file
+		where id in 
+		<iterate conjunction="," open="(" close=")">
+			#ids[]#
+		</iterate>
+		)
+    </delete>
+    <update id="deleteFileByIds" parameterClass="java.util.List">
+    	update file set enable = 0
+    	where id in 
+    	(select file_id from dept_file
+		where id in 
+		<iterate conjunction="," open="(" close=")">
+			#ids[]#
+		</iterate>
+		)
+    </update>
+</sqlMap>
+
+
+

@@ -1,0 +1,99 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="user">
+<select id="queryUserCount" resultClass="java.lang.Integer">
+	select count(*) from user
+</select>
+<select id="queryUser" resultClass="com.zhl.oa.model.User">
+	select u.id as id,
+		u.user_name as userName,
+		u.real_name as realName,
+		u.dept as dept,
+		r.name as role
+	from user u
+	left join user_role ur on u.id = ur.user_id
+	left join role r on r.id = ur.role_id
+	group by u.user_name
+</select>
+<insert id="addUser" parameterClass="com.zhl.oa.model.User">
+	insert into user
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="userName">            
+		     user_name = #userName#  
+		</isNotNull>  
+		<isNotNull prepend="," property="realName">            
+		     real_name = #realName#  
+		</isNotNull>  
+		<isNotNull prepend="," property="password">            
+		     password = #password#  
+		</isNotNull>  
+		<isNotNull prepend="," property="dept">            
+		     dept = #dept#  
+		</isNotNull>  
+	</dynamic>  
+</insert>
+<delete id="deleteUser" parameterClass="java.lang.Integer">
+	delete from user
+	where id = #id:INTEGER#
+</delete>
+<select id="queryUserById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.User">
+	select id as id,
+		user_name as userName,
+		real_name as realName,
+		password as password,
+		dept as dept
+	from user
+	where id = #id:INTEGER#
+</select>
+<update id="editUser" parameterClass="com.zhl.oa.model.User">
+	update user
+	<dynamic prepend="set">  
+		<isNotNull prepend="," property="userName">            
+		     user_name = #userName#  
+		</isNotNull>  
+		<isNotNull prepend="," property="realName">            
+		     real_name = #realName#  
+		</isNotNull>  
+		<isNotNull prepend="," property="password">            
+		     password = #password#  
+		</isNotNull>  
+		<isNotNull prepend="," property="dept">            
+		     dept = #dept#  
+		</isNotNull>  
+	</dynamic> 
+	where id = #id:INTEGER#
+</update>
+<select id="queryUserByName" parameterClass="java.lang.String" resultClass="com.zhl.oa.model.User">
+	select id as id,
+		user_name as userName,
+		real_name as realName,
+		dept as dept
+	from user
+	where user_name like #user#
+</select>
+<select id="queryUserByNameCount"  parameterClass="java.lang.String" resultClass="java.lang.Integer">
+	select count(*) from user
+	where user_name like #user#
+</select>
+<select id="queryUserRoleById" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	select count(*) from user_role
+	where user_id = #userId# and role_id = #roleId#
+</select>
+<delete id="deleteUserRoleByUserId" parameterClass="java.lang.Integer">
+	delete from user_role
+	where user_id = #userId:INTEGER#
+</delete>
+<insert id="insertUserRole" parameterClass="com.zhl.oa.model.UserRole">
+	insert into user_role (user_id, role_id) values (#userId#, #roleId#)
+</insert>
+<select id="queryRoleIdByUserId" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+	select role_id from user_role
+	where user_id = #userId:INTEGER#
+</select>
+<select id="queryCountByUserId" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+	select count(role_id) from user_role
+	where user_id = #userId:INTEGER#
+</select>
+</sqlMap>
+
+
+

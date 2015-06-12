@@ -1,0 +1,33 @@
+
+#navigation-block {
+	position:relative;
+	top:10px;
+	left:10px;
+}
+
+ul#sliding-navigation
+{
+	list-style: none;
+	font-size: .75em;
+	margin: 5px 0;
+	padding: 0;
+}
+
+ul#sliding-navigation li.sliding-element h3,
+ul#sliding-navigation li.sliding-element a
+{
+	display: block;
+	width: 150px;
+	padding: 5px 18px;
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+ul#sliding-navigation li.sliding-element a
+{
+	color: #999;
+	background:#f2efef  repeat-y;
+	text-decoration: none;
+	font-size: 12px;
+}
+

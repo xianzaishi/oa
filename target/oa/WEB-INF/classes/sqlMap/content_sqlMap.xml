@@ -1,0 +1,101 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="content">
+	<insert id="addContent" parameterClass="com.zhl.oa.model.Content">
+		insert into content 
+		(channel_id, title, content
+		<dynamic prepend="">
+			<isNotEmpty prepend="," property="creator">creator</isNotEmpty>
+			<isNotEmpty prepend="," property="modifier">modifier</isNotEmpty>
+			<isNotEmpty prepend="," property="createDate">create_date</isNotEmpty>
+			<isNotEmpty prepend="," property="modifyDate">modify_date</isNotEmpty>
+			<isNotEmpty prepend="," property="fileUpload">fileUpload</isNotEmpty>
+		</dynamic>
+		)
+		values (#channelId:INTEGER#, #title#, #content#
+		<dynamic prepend="">
+			<isNotEmpty prepend="," property="creator">#creator#</isNotEmpty>
+			<isNotEmpty prepend="," property="modifier">#modifier#</isNotEmpty>
+			<isNotEmpty prepend="," property="createDate">#createDate#</isNotEmpty>
+			<isNotEmpty prepend="," property="modifyDate">#modifyDate#</isNotEmpty>
+			<isNotEmpty prepend="," property="fileUpload">#fileUpload#</isNotEmpty>
+		</dynamic>
+		)
+	</insert>
+	<select id="queryContent" resultClass="com.zhl.oa.model.Content">
+		select id as id, 
+			channel_id as channelId,
+			title as title, 
+			content as content, 
+			creator as creator, 
+			modifier as modifier, 
+			create_date as createDate, 
+			modify_date as modifyDate, 
+			file_upload as fileUpload 
+		from content
+		order by create_date desc
+	</select>
+	<select id="queryContentById" parameterClass="java.lang.Integer" resultClass="com.zhl.oa.model.Content">
+		select id as id, 
+			channel_id as channelId,
+			title as title, 
+			content as content, 
+			creator as creator, 
+			modifier as modifier, 
+			create_date as createDate, 
+			modify_date as modifyDate, 
+			file_upload as fileUpload 
+		from content
+		where id = #id:INTEGER#
+	</select>
+	<select id="queryContentCount" resultClass="java.lang.Integer">
+		select count(id) from content
+	</select>
+	<delete id="deleteContentById" parameterClass="java.util.List">
+		delete from content
+		where id in    
+		<iterate conjunction="," open="(" close=")">
+			#ids[]#
+		</iterate>
+    </delete>
+    <update id="updateContent" parameterClass="com.zhl.oa.model.Content">
+    	update content   
+      	<dynamic prepend="set">  
+          <isNotNull prepend="," property="channelId">            
+               channel_id = #channelId:INTEGER#  
+           </isNotNull>  
+          <isNotNull prepend="," property="title">            
+               title = #title#  
+           </isNotNull>  
+          <isNotNull prepend="," property="content">            
+               content = #content#  
+           </isNotNull>  
+          <isNotNull prepend="," property="creator">            
+               creator = #creator#  
+           </isNotNull>  
+          <isNotNull prepend="," property="modifier">            
+               modifier = #modifier#  
+           </isNotNull>  
+          <isNotNull prepend="," property="createDate">            
+               create_date = #createDate#  
+           </isNotNull>  
+          <isNotNull prepend="," property="modifyDate">            
+               modify_date = #modifyDate#  
+           </isNotNull>  
+          <isNotNull prepend="," property="fileUpload">            
+               file_upload = #fileUpload#  
+           </isNotNull>  
+      	</dynamic>  
+     	where id=#id:INTEGER#
+    </update>
+    <select id="queryContentByKeyword" parameterClass="java.lang.String" resultClass="com.zhl.oa.model.Content">
+    	select * from content
+    	where title like '%$keyword$%'
+    </select>
+    <select id="keywordSearchResultCount" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+    	select count(*) from content
+    	where title like '%$keyword$%'
+    </select>
+</sqlMap>
+
+
+

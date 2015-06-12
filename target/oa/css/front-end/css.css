@@ -1,0 +1,49 @@
+.bd01 {
+	background-image: url(../../images/front-end/cfsdeyy_02.gif);
+	background-repeat: repeat-x;
+}
+.css {
+	font-family: "����";
+	font-size: 12px;
+	color: #000000;
+}
+.bai {
+	font-family: "����";
+	font-size: 13px;
+	color: #FFFFFF;
+}.hei {
+	font-family: "����";
+	font-size: 12px;
+	color: #000000;
+}.hei14 {
+	font-family: "����";
+	font-size: 12px;
+	line-height: 25px;
+	color: #000000;
+}
+.bai14 {
+	font-family: "����";
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+.lu14 {
+	font-family: "����";
+	font-size: 14px;
+	color: #017C6D;
+}
+.lv {
+	color: #016559;
+	font-family: "����";
+}
+.lv11 {
+	font-family: "����";
+	font-size: 13px;
+	line-height: 30px;
+	color: #027C6D;
+}
+.lv12 {
+	font-family: "����";
+	font-size: 12px;
+	color: #2C8D88;
+}
