@@ -73,7 +73,7 @@ ul,li {list-style-type:none; text-transform:capitalize;}
 				<tbody>
 					<tr>
 						<th scope="col" align="center"><img
-							src="${contextPath}/images/front-end/cfsdeyy_05.gif" height="103"
+							src="${contextPath}/images/front-end/cfsdeyy_05.png" height="103"
 							width="325" /></th>
 					</tr>
 				</tbody>
