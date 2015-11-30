@@ -6,7 +6,7 @@
   <div id="footer">
     <div id="copyright">
       <div style="float:left; padding:3px;"><a href=""><img src="${contextPath}/images/footer_logo.gif" width="42" height="35" alt="" title="865171" border="0" /></a></div>
-      <div style="float:left; padding:14px 10px 10px 10px;"> 赤峰市松山区医院.&copy; All Rights Reserved 2014- By <a href="http://www.cfdeyy.com" style="color:#772c17;">www.cfdeyy.com</a></div>
+      <div style="float:left; padding:14px 10px 10px 10px;"> 赤峰市松山医院.&copy; All Rights Reserved 2014- By <a href="http://www.cfssyy.com" style="color:#772c17;">www.cfssyy.com</a></div>
     </div>
     <ul class="footer_menu">
       <li><a href="index.htm" class="nav_footer"> Home </a></li>

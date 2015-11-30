@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>赤峰市第二医院</title>
+<title>赤峰市松山医院</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="cssBasePath" value="${contextPath}/css" />
 <c:set var="scriptBasePath" value="${contextPath}/script" />
@@ -73,7 +73,7 @@ ul,li {list-style-type:none; text-transform:capitalize;}
 				<tbody>
 					<tr>
 						<th scope="col" align="center"><img
-							src="${contextPath}/images/front-end/cfsdeyy_05.gif" height="103"
+							src="${contextPath}/images/front-end/cfsdeyy_05.png" height="103"
 							width="325" /></th>
 					</tr>
 				</tbody>
@@ -228,11 +228,11 @@ function addfavorite()
 {
    if (document.all)
    {
-      window.external.addFavorite('http://www.cfdeyy.com','赤峰市第二医院');
+      window.external.addFavorite('http://www.cfssyy.com','赤峰市松山医院');
    }
    else if (window.sidebar)
    {
-      window.sidebar.addPanel('赤峰市第二医院', 'http://www.cfdeyy.com', '');
+      window.sidebar.addPanel('赤峰市松山医院', 'http://www.cfssyy.com', '');
    }
 } 
 </script>
