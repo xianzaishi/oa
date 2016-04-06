@@ -21,8 +21,8 @@
 		<tr>
 			<th scope="col" height="112" width="9">&nbsp;</th>
 			<td class="lv11" scope="col" align="left" valign="middle" width="637">
-				制作维护：赤峰市松山医院<br/>
-				 版权所有（C）赤峰市松山医院  All Rights Reserved
+				制作维护：赤峰松山医院<br/>
+				 版权所有（C）赤峰松山医院  All Rights Reserved
 				</td>
 			<th scope="col" align="left" valign="middle" width="314">
 			<img src="${contextPath}/images/front-end/001.jpg" height="69" width="274" /></th>
