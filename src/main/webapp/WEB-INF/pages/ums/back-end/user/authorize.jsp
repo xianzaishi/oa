@@ -21,7 +21,7 @@
 </div>
 <script language="javascript">
 $(function(){
-	var roleIds = ${roleIds };
+	var roleIds = ${roleIds == null ? 0 : roleIds };
 	var count = roleIds.length;
 	for(i=0; i<count; i++){
 		$("#" + roleIds[i]).attr("checked", true);

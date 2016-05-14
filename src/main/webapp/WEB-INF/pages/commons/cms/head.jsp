@@ -73,7 +73,7 @@ ul,li {list-style-type:none; text-transform:capitalize;}
 				<tbody>
 					<tr>
 						<th scope="col" align="center"><img
-							src="${contextPath}/images/front-end/cfsdeyy_05.gif" height="103"
+							src="${contextPath}/images/front-end/kalaqinqiyiyuan.png" height="103"
 							width="325" /></th>
 					</tr>
 				</tbody>
@@ -90,7 +90,7 @@ ul,li {list-style-type:none; text-transform:capitalize;}
 							<tbody>
 								<tr>
 									<th scope="col"><img
-										src="${contextPath}/images/front-end/POP.gif" height="23"
+										src="${contextPath}/images/front-end/pop.png" height="23"
 										width="206" /></th>
 									<td scope="col">
 										<c:choose>

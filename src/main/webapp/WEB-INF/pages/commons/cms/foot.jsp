@@ -26,7 +26,7 @@
 				 版权所有（C）喀喇沁旗医院  All Rights Reserved
 				</td>
 			<th scope="col" align="left" valign="middle" width="314">
-			<img src="${contextPath}/images/front-end/001.gif" height="69" width="274" /></th>
+			</th>
 		</tr>
 	</tbody>
 </table>

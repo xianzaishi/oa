@@ -64,7 +64,7 @@
     <div id="wrapperbottom_branding">
 	    <div id="wrapperbottom_branding_text">
 		    版权所有:<a href="javascript:void(0)" style='text-decoration: none'>信息科 </a>| 
-		    <a href="javascript:void(0)" style='text-decoration: none'>赤峰市第二医院</a>
+		    <a href="javascript:void(0)" style='text-decoration: none'>喀喇沁旗医院</a>
 		</div>
     </div>
 </body>

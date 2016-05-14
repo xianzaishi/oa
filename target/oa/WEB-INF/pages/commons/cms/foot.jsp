@@ -21,12 +21,12 @@
 		<tr>
 			<th scope="col" height="112" width="9">&nbsp;</th>
 			<td class="lv11" scope="col" align="left" valign="middle" width="637">
-				制作维护：赤峰市第二医院 信息科<br/>
-				 地址：赤峰市长青街中段路北1号 邮编：024000<br/>
-				 版权所有（C）赤峰市第二医院  All Rights Reserved
+				制作维护：喀喇沁旗医院 信息科<br/>
+				 <!-- 地址：赤峰市长青街中段路北1号 邮编：024000<br/> -->
+				 版权所有（C）喀喇沁旗医院  All Rights Reserved
 				</td>
 			<th scope="col" align="left" valign="middle" width="314">
-			<img src="${contextPath}/images/front-end/001.gif" height="69" width="274" /></th>
+			</th>
 		</tr>
 	</tbody>
 </table>
